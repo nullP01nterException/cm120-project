@@ -6,8 +6,9 @@
 canvas = document.getElementById('game');
 context = canvas.getContext('2d');
 ////////////////////VARAIBLES///////////////////////
-//var state = 0;
-canvas.addEventListener("click", mouseClicked);
+canvas.addEventListener("mousedown", mouseDown);
+canvas.addEventListener("mouseup", mouseUp);
+canvas.addEventListener("mousemove", mouseMove);
 ////////////////////////////////////////////////////
 function init(){
 	context.fillStyle = "white";
@@ -29,6 +30,13 @@ function gameState(state){
 		case 2:
 			updateGame();
 			drawGame();
+			break;
+		case 3:
+			updateTitle();
+		    drawCredits();
+		    break;
+		case 4:
+			drawPause();
 			break;
 		default:
 			drawGame();

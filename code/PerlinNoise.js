@@ -58,7 +58,11 @@ var yoff = 0.0;        // 2nd dimension of perlin noise
 var perlin = new PerlinNoise();
 ////////////////////////////////////////////////////////////////////////
 function drawWave() {
-  context.fillStyle = "rgba(82,212,255,0.5)";
+  var grad = context.createLinearGradient(0, 0, 0, 500);
+      grad.addColorStop(0.3, "#D6F5FF");
+      grad.addColorStop(1, "#004961");
+      context.fillStyle = grad;
+
   context.strokeStyle = "rgba(82,212,255,0.5";
 
   context.beginPath(); 
