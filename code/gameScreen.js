@@ -1,5 +1,5 @@
 function updateGame(){
-	
+	changeGameState();
 }
 
 function drawGame(){
@@ -13,5 +13,6 @@ function drawPause(){
 }
 
 function changeGameState(){
-	
+	if(paused) state = 5;
+	else state = 2;
 }

@@ -6,9 +6,16 @@ var mouseY = 0;
 //state = 0 (title)
 var titleOver = false;
 var titleCreditOver = false;
+var titleInstructOver = false;
+
+//state = 2 (gameScreen)
+var paused = false;
 
 //state = 3 (credits)
 var overCreditBack = false;
 
-//mouse events
+//state = 4 (instrtuctions)
+var overInstructBack = false;
+
+//ui events
 var mouseClicked = false;

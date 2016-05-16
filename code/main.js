@@ -36,6 +36,11 @@ function gameState(state){
 		    drawCredits();
 		    break;
 		case 4:
+			updateTitle();
+			drawInstructions();
+			break;
+		case 5:
+			updateGame();
 			drawPause();
 			break;
 		default:
