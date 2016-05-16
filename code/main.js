@@ -18,15 +18,16 @@ function init(){
 }
 
 function gameState(state){
+	console.log(state);
 	switch(state){
 		case 0:
 			updateTitle();
 			drawTitle();
 			break;
 		case 1:
-			updateGameMenu();
-			drawGameMenu();
-			break;
+			//updateGameMenu();
+			//drawGameMenu();
+			//break;
 		case 2:
 			updateGame();
 			drawGame();
@@ -44,6 +45,7 @@ function gameState(state){
 			drawPause();
 			break;
 		default:
+		updateGame();
 			drawGame();
 			break;
 	}
