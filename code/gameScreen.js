@@ -135,7 +135,7 @@ function Silt(x, y, radius, lifetime, color, type)
 { //creating Particle object, lifetime: how long on screen
   this.x = x;
   this.y = y;
-  this.radius = radius;
+  this.r = radius;
   this.speed = SILTSPEED;
   this.lifetime = lifetime;
   this.color = color;
@@ -147,17 +147,17 @@ function Silt(x, y, radius, lifetime, color, type)
     {
       context.fillStyle = this.color;
       context.beginPath();
-      context.arc(this.x, this.y, this.radius, Math.PI * 2, false);
+      context.arc(this.x, this.y, this.r, Math.PI * 2, false);
       context.stroke();
       context.fill();
     }
-    else // stationary triangle (pile)
+    else if(this.type == 1) // stationary triangle (pile)
     {
       context.fillStyle = this.color;
       context.beginPath();
-      context.moveTo(this.x, this.y-this.radius);
-      context.lineTo(this.x + Math.sqrt(3) * this.radius, canvas.height);
-      context.lineTo(this.x - Math.sqrt(3) * this.radius, canvas.height);
+      context.moveTo(this.x, this.y-this.r);
+      context.lineTo(this.x + Math.sqrt(3) * this.r, canvas.height);
+      context.lineTo(this.x - Math.sqrt(3) * this.r, canvas.height);
       context.fill()
     }
   } // draw
@@ -178,7 +178,8 @@ function Silt(x, y, radius, lifetime, color, type)
     }
     if (this.y > canvas.height && this.type != 2)
     {
-      this.type = 1; //truns the silt into a triangle/pile
+      if(this.type != 3)
+        this.type = 1; // becomes a triangle at the bottom unless it is already set to be destroyed
     } //end if
     else if (this.y > canvas.height && this.type == 2)
     {
@@ -186,29 +187,37 @@ function Silt(x, y, radius, lifetime, color, type)
       this.type = 3; // self destruct
     } //end else if
   } //end update
+  
+  this.collide = function()
+  {
+    player.energy += SILTVALUE;
+    if(player.energy < 0)
+      player.energy = 0;
+    this.type = 3;
+  } // player collision
     
-  this.collisionCheck = function(obj, iter)
+  this.siltPiling = function(obj)
   {
     for (var i = 0; i < obj.length; i++)
     {
     
       //Case: white particle on pile:
-      if (this.type == 1 &&  obj[i].type != 1 && this.radius + obj[i].radius >= Math.sqrt(Math.pow(this.x - obj[i].x, 2) + Math.pow(this.y - obj[i].y, 2)) && this != obj[i])
+      if (this.type == 1 &&  obj[i].type != 1 && this.r + obj[i].r >= Math.sqrt(Math.pow(this.x - obj[i].x, 2) + Math.pow(this.y - obj[i].y, 2)) && this != obj[i])
       {
         var index = obj.indexOf(obj[i]);
         obj.splice(index, 1);//removes particle that fell
         this.type = 1;//changes the type to a triangle
-        this.radius = Math.sqrt(Math.pow(this.radius + 3, 2)); // adds volume to pile
+        this.r = Math.sqrt(Math.pow(this.r + 3, 2)); // adds volume to pile
       }//end if
           
       //Case: red particle on pile:   
-      else if (this.type == 2 &&  obj[i].type != 2 && obj[i].type != 0 && this.radius + obj[i].radius >= Math.sqrt(Math.pow(this.x - obj[i].x, 2) + Math.pow(this.y - obj[i].y, 2)) && this != obj[i])
+      else if (this.type == 2 &&  obj[i].type != 2 && obj[i].type != 0 && this.r + obj[i].r >= Math.sqrt(Math.pow(this.x - obj[i].x, 2) + Math.pow(this.y - obj[i].y, 2)) && this != obj[i])
       {
         var index = obj.indexOf(obj[i]);
         obj.splice(index, 1); //removes pile
       }//end else
     } //end for
-  } //enc collisionCheck
+  } //end siltPiling
     
 } // silt particle constructor
 
@@ -242,7 +251,7 @@ function resetGame()
   player = new Zoox(canvas.width/2, canvas.height/2, 0, 30);
   updateObjects.push(player);
   drawObjects.push(player);
-  collisionObjects.push(player);
+  //collisionObjects.push(player);
   nutrientSystem(15);
   sunlightSystem(30);
   score = 0;
@@ -319,7 +328,7 @@ function updateGame()
       var temp = new Silt(Math.random()*canvas.width, 0, 5, 0, 'black', 0);
       updateObjects.push(temp);
       drawObjects.push(temp);
-      //collisionObjects.push(temp);
+      collisionObjects.push(temp);
     }
     
     growthCounter++;
@@ -344,6 +353,16 @@ function updateGame()
     {
       updateObjects[i].update();
     }
+    for (var i = 0; i < siltParticles.length; i++)
+    {
+      if(siltParticles[i].type == 3)
+      {
+        console.log(collisionObjects.indexOf(siltParticles[i]));
+        siltParticles.splice(i, 1); // destroys particle
+      }
+      else
+        siltParticles[i].siltPiling(siltParticles);
+    } // silt collision
   }
 }
 
