@@ -30,18 +30,21 @@ var collisionObjects = new Array();
 
 var SILTRATE = .05;
 var SILTSPEED = 1.9
+var SILTVALUE = -3;
+var siltParticles = new Array();
+
 var SPEED = 5;
 var SLOWSPEED = 2;
 var SUNLIGHTSPEED = 2;
 var PLAYERENERGYRATE = -.06;
-var PLAYERSTARTENERGY = 100;
+var PLAYERSTARTENERGY = 50;
 var REEFENERGYRATE = -5;
-var REEFSTARTENERGY = 100;
+var REEFSTARTENERGY = 50;
 var MAXPLAYERENERGY = 100;
 var MAXREEFENERGY = 100;
-var SUNLIGHTVALUE = 3;
-var NUTRIENTVALUE = 1;
-var REEFGROWTHRATE = canvas.width / 100;
+var SUNLIGHTVALUE = 5;
+var NUTRIENTVALUE = 3;
+var REEFGROWTHRATE = canvas.width / 300;
 
 var growthCounter = 0;
 var GROWTHTIMER = 20;
