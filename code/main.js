@@ -3,12 +3,13 @@
  *
 */
 
-canvas = document.getElementById('game');
-context = canvas.getContext('2d');
+
 ////////////////////VARAIBLES///////////////////////
 canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("mousemove", mouseMove);
+document.addEventListener('keydown', handleKeyDown);
+document.addEventListener('keyup', handleKeyUp);
 ////////////////////////////////////////////////////
 function init(){
 	context.fillStyle = "white";
@@ -18,7 +19,7 @@ function init(){
 }
 
 function gameState(state){
-	console.log(state);
+//console.log(state);
 	switch(state){
 		case 0:
 			updateTitle();
@@ -65,4 +66,5 @@ function gameLoop(){
 	draw();
 }
 
+resetGame();
 setInterval(gameLoop, 60);
