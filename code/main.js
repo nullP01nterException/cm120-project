@@ -16,6 +16,7 @@ function init(){
   	context.fillRect(0,0,canvas.width, canvas.height);
   	context.strokeStyle = "black";
 	context.strokeRect(0,0,canvas.width, canvas.height);
+	loop(music);
 }
 
 function gameState(state){
@@ -58,6 +59,11 @@ function update(){
 
 function draw() {
 	init();
+	if(state == 2){
+		music.pause();
+		music.currentTime = 0;
+		loop(gameMusic);
+	}
 	gameState(state);
 }
 

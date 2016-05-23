@@ -15,6 +15,13 @@ function mouseMove(eventParams){
 
 document.addEventListener('keydown', function(e){
 		var key = e.which;
+		pressedKey = key;
+		keyDown = true;
 		e.preventDefault();
 		if(key == "27" && state == 2 || state == 5) paused = !paused;
+	}, false);
+
+document.addEventListener('keyup', function(e){
+		pressedKey = e.which;
+		keyDown = false;
 	}, false);

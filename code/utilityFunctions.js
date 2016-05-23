@@ -8,3 +8,13 @@ Table of Content:
 function map(value, low1, high1, low2, high2) {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 }
+
+function loop(sound){
+	if(sound.currentTime >= sound.duration){
+		sound.pause();
+		sound.currentTime = 0;
+		sound.play();
+	}else{
+		sound.play();
+	}
+}

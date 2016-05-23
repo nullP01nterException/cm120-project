@@ -317,9 +317,47 @@ function handleKeyUp(e)
   }
 } // handleKeyUp
 
+function audioSwitch(){
+	switch(pressedKey){
+	case 87: // up
+    case 38:
+    case 73:
+      if (upKey) {
+        	moveNoise.play();
+        	upKey = false;
+    	}
+      break;
+    case 74: // left turn
+    case 37:
+    case 87:
+      if (leftKey) {
+        	moveNoise.play();
+        	leftKey = false;
+    	}
+      break;
+    case 39: // right turn
+    case 68:
+    case 76:
+     if (rightKey) {
+        	moveNoise.play();
+        	rightKey = false;
+    	}
+      break;
+    case 83: // down
+    case 75:
+    case 40:
+      if (downKey) {
+        	moveNoise.play();
+        	downtKey = false;
+    	}
+      break;
+	}
+}
+
 function updateGame()
 {
 	changeGameState();
+	audioSwitch();
   
   if(alive)
   {

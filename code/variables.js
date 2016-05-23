@@ -61,3 +61,18 @@ var up = false;
 var left = false;
 var right = false;
 var down = false;
+
+var pressedKey = 0;
+var upKey = false;
+var leftKey = false;
+var rightKey = false;
+var downKey = false;
+var keyDown = false;
+
+//gameState
+var gameOver = false;
+
+//audio
+var moveNoise = new Audio('../data/WaterSplash.mp3');
+var music = new Audio('../data/Nichijou---ZzzInstrumental.mp3');
+var gameMusic = new Audio('../data/Inspiration.mp3');
