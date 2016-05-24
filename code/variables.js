@@ -70,9 +70,10 @@ var downKey = false;
 var keyDown = false;
 
 //gameState
-var gameOver = false;
+var win = null;
 
 //audio
 var moveNoise = new Audio('../data/WaterSplash.mp3');
 var music = new Audio('../data/Nichijou---ZzzInstrumental.mp3');
 var gameMusic = new Audio('../data/Inspiration.mp3');
+var waves = new Audio('../data/BeachWaves.mp3');

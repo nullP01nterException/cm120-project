@@ -379,12 +379,14 @@ function updateGame()
         reefEnergy = 0;
         if(leftBoundary >= rightBoundary)
           alive = false;
+      	  win = false;
       }
       else
       {
         leftBoundary -= REEFGROWTHRATE;
         if(leftBoundary <= 0)
           alive = false;
+      	  win = true;
       }
     }
     for(var i=0; i<updateObjects.length; i++)
@@ -429,4 +431,12 @@ function drawPause(){
 function changeGameState(){
 	if(paused) state = 5;
 	else state = 2;
+
+	if(win && !alive){
+		state = 6;
+		gameMusic.pause();
+	}else if(!win && !alive){
+		state = 7;
+		gameMusic.pause();
+	}
 }
