@@ -74,6 +74,5 @@ var win = null;
 
 //audio
 var moveNoise = new Audio('../data/WaterSplash.mp3');
-var music = new Audio('../data/Nichijou---ZzzInstrumental.mp3');
-var gameMusic = new Audio('../data/Inspiration.mp3');
-var waves = new Audio('../data/BeachWaves.mp3');
+var music = new Audio('../data/Green-Bird.mp3');
+var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
