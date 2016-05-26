@@ -249,6 +249,7 @@ function resetGame()
   drawObjects = new Array();
   collisionObjects = new Array();
   player = new Zoox(canvas.width/2, canvas.height/2, 0, 30);
+  coralReset();
   updateObjects.push(player);
   drawObjects.push(player);
   //collisionObjects.push(player);
@@ -358,6 +359,7 @@ function updateGame()
 {
 	changeGameState();
 	audioSwitch();
+  updateCoral();
   
   if(alive)
   {
@@ -368,27 +370,33 @@ function updateGame()
       drawObjects.push(temp);
       collisionObjects.push(temp);
     }
-    
+
+
+    if(coralGrowthResource <= 0){
+      alive = false;
+      win = false;
+    } else if(coralGrowthResource >= coralResourceMax){
+          alive = false;
+          win = true;
+    }
+
+    leftBoundary = canvas.width-(coralGrowthResource/coralResourceMax)*canvas.width+50;
+
     growthCounter++;
-    if(growthCounter % GROWTHTIMER === 0)
-    {
-      reefEnergy += REEFENERGYRATE;
-      if(reefEnergy < 0)
-      {
-        leftBoundary += (reefEnergy / REEFENERGYRATE) * REEFGROWTHRATE;
+    if(growthCounter % GROWTHTIMER === 0){
+      if (reefEnergy < 0){
         reefEnergy = 0;
-        if(leftBoundary >= rightBoundary)
-          alive = false;
-      	  win = false;
-      }
-      else
-      {
-        leftBoundary -= REEFGROWTHRATE;
-        if(leftBoundary <= 0)
-          alive = false;
-      	  win = true;
+      } else if(reefEnergy > 0) {
+        coralResource += sunlightResource;
+        reefEnergy -= 1;
       }
     }
+
+    if (coralResource > 0 && reefEnergy == 0){
+      coralResource = coralResource - decaySpeed;
+    }
+    
+
     for(var i=0; i<updateObjects.length; i++)
     {
       updateObjects[i].update();
@@ -408,9 +416,9 @@ function updateGame()
 
 function drawGame(){
 	drawWave();
-    
-  context.fillStyle = 'green';
-  context.fillRect(leftBoundary,upperBoundary,canvas.width, canvas.height); 
+  drawCoral();
+  //context.fillStyle = 'green';
+  //context.fillRect(leftBoundary,upperBoundary,canvas.width, canvas.height); 
   
   for(var i=drawObjects.length-1; i>=0; i--)
   {

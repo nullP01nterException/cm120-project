@@ -1,17 +1,6 @@
 var coralColor = new Image();
 
-coralColor.src = "https://wpengine.com/wp-content/uploads/2015/03/https.jpg"; //STROKE PLACEHOLDER
-
-canvas.addEventListener("click", handleClick);
-
-function handleClick() {
-
-	//coralReset(); //This is reset functionality!!
-
-  coralGrowthResource +=sunlightResource;
-  coralResource +=sunlightResource;
- 
-}
+coralColor.src = "../data/coralDaubs.png"; //STROKE PLACEHOLDER
 
 var coralStarter = true,
   u0 = 0,
@@ -63,8 +52,8 @@ coralGrowthResource = coralResource;
 }
 
 function sunResourceGain(){
-	coralGrowthResource +=sunlightResource;
-  coralResource +=sunlightResource;
+	coralGrowthResource += sunlightResource;
+  coralResource += sunlightResource;
 }
 
 function coralStart() {
@@ -93,19 +82,12 @@ function coralStart() {
 }
 
 function coralUpdateCont(){
-	//REPLACE IN FINAL
-  
-  //decay
-  if (coralResource > 0){
-  	coralResource = coralResource - decaySpeed;
-  }
-  //
   if (coralGrowthResource <= coralResource + 2*decaySpeed && coralGrowthResource >= coralResource - 2*decaySpeed){
   	coralGrowthResource = coralResource;
   }else	if (coralGrowthResource < coralResource){
-  	coralGrowthResource++;
+  	coralGrowthResource+= growthResourceRate;
  	}else	if (coralGrowthResource > coralResource){
-  coralGrowthResource--;
+  coralGrowthResource-= growthResourceRate;
   }
 }
 
@@ -215,8 +197,8 @@ function updateCoral() {
 }
 
 function drawCoral() {
-  canvas.width = canvas.width;
-    context.fillText(coralResource,400,30)
+    context.fillText(coralResource,400,30);
+    context.fillText(coralGrowthResource,400,60);
     var coralPattern = context.createPattern(coralColor, "repeat");
     context.fillStyle = coralPattern;
   for (var outer = 0; outer < reefArray.length; outer++){
@@ -226,7 +208,7 @@ function drawCoral() {
       context.beginPath();
       context.moveTo(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY);
       context.bezierCurveTo(reefArray[outer][inner].curCp2X, reefArray[outer][inner].curCp2Y, reefArray[outer][inner].curCp1X, reefArray[outer][inner].curCp1Y, reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY);
-      context.lineWidth = 6;
+      context.lineWidth = 8;
       context.stroke();
       if(reefArray[outer][inner].t > 0){
       context.beginPath();
@@ -236,4 +218,7 @@ function drawCoral() {
       }
     }
   }
+  context.fillStyle = 'black';
+  context.strokeStyle = 'black';
+  context.lineWidth = 2;
 }

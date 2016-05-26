@@ -50,8 +50,8 @@ function drawInstructions(){
 	context.fillStyle = 'white';
 	context.fillText("Use the arrow keys to play", canvas.width/2-200, canvas.height/2);
 
-	//context.fillStyle = 'blue';
-	//context.fillRect(10,10,50,30);
+	context.fillStyle = 'blue';
+	context.fillRect(10,10,50,30);
 	context.fillStyle = 'white';
 	context.font = "20px Verdana";
 	context.fillText("Back", 10,35);
@@ -63,8 +63,8 @@ function drawCredits(){
 	context.fillStyle = 'white';
 	context.fillText("The Fellowship of the Reef", canvas.width/2-200, canvas.height/2);
 
-	//context.fillStyle = 'blue';
-	//context.fillRect(10,10,50,30);
+	context.fillStyle = 'blue';
+	context.fillRect(10,10,50,30);
 	context.fillStyle = 'white';
 	context.font = "20px Verdana";
 	context.fillText("Back", 10,35);
