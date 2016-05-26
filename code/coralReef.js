@@ -1,6 +1,6 @@
 var coralColor = new Image();
 
-coralColor.src = "../data/coralDaubs.png"; //STROKE PLACEHOLDER
+coralColor.src = "../data/coralRipple.png"; //STROKE PLACEHOLDER
 
 var coralStarter = true,
   u0 = 0,
