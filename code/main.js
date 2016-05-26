@@ -69,13 +69,11 @@ function draw() {
 		music.pause();
 		music.currentTime = 0;
 		loop(gameMusic);
-		loop(waves);
 	}
 
 	if(state == 5 || state == 6 || state == 7) music.pause();
 	if(state == 5){
 		gameMusic.pause();
-		waves.pause();
 	}
 	gameState(state);
 }
