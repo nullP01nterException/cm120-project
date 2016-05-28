@@ -369,6 +369,7 @@ function updateGame()
       updateObjects.push(temp);
       drawObjects.push(temp);
       collisionObjects.push(temp);
+      siltParticles.push(temp);
     }
 
 
