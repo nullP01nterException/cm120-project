@@ -271,7 +271,7 @@ function handleKeyDown(e)
       break;
     case 74: // left turn
     case 37:
-    case 87:
+    case 65:
       left = true;
       break;
     case 39: // right turn
@@ -302,7 +302,7 @@ function handleKeyUp(e)
       break;
     case 74: // left turn
     case 37:
-    case 87:
+    case 65:
       left = false;
       break;
     case 39: // right turn
