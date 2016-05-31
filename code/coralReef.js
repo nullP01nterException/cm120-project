@@ -1,6 +1,6 @@
 var coralColor = new Image();
 
-coralColor.src = "../data/coralDaubs.png"; //STROKE PLACEHOLDER
+coralColor.src = "../data/coralRipple.png";
 
 var coralStarter = true,
   u0 = 0,
@@ -197,8 +197,8 @@ function updateCoral() {
 }
 
 function drawCoral() {
-    context.fillText(coralResource,400,30);
-    context.fillText(coralGrowthResource,400,60);
+    //context.fillText(coralResource,400,30);
+    //context.fillText(coralGrowthResource,400,60);
     var coralPattern = context.createPattern(coralColor, "repeat");
     context.fillStyle = coralPattern;
   for (var outer = 0; outer < reefArray.length; outer++){

@@ -7,10 +7,10 @@ var mouseX = 0;
 var mouseY = 0;
 
 //reef Variables
-var growthSpeed = .01; //control is .01.  Though messing with this does mess with mechanics atm... woops
+var growthSpeed = .005; //control is .01.  Though messing with this does mess with mechanics atm... woops
 var decaySpeed = .4;   //control is .4
 var growthResourceRate = 1; //another thing that turns out shouldn't be messed with without knowledge
-var sunlightResource = 5;
+var sunlightResource = 2;
 var branchXStretch = 100; //control is 100 atm
 // ^---This controls the amount that each branch may stray from the center horizontally, treat value like a diameter, not radius!!
 var branchYStretch = 10; //control is 0 atm
@@ -55,12 +55,12 @@ var SPEED = 5;
 var SLOWSPEED = 2;
 var SUNLIGHTSPEED = 2;
 var PLAYERENERGYRATE = -.06;
-var PLAYERSTARTENERGY = 30;
+var PLAYERSTARTENERGY = 10;
 var REEFENERGYRATE = -5;
 var REEFSTARTENERGY = 20;
 var MAXPLAYERENERGY = 100;
 var MAXREEFENERGY = 100;
-var SUNLIGHTVALUE = 5;
+var SUNLIGHTVALUE = 4;
 var NUTRIENTVALUE = 3;
 var REEFGROWTHRATE = canvas.width / 300;
 
