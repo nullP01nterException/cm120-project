@@ -82,11 +82,12 @@ function nutrientParticle(x,y)
   this.r = Math.random()*2 + 4;
   this.draw = function()
   {
-    context.fillStyle = 'brown';
-    context.beginPath();
-    context.arc(this.x, this.y, this.r, Math.PI*2, false) 
-    context.stroke();
-    context.fill()
+    //context.fillStyle = 'brown';
+    //context.beginPath();
+   // context.arc(this.x, this.y, this.r, Math.PI*2, false) 
+   //context.stroke();
+    //context.fill()
+    context.drawImage(zooxFood, this.x-(this.r+3), this.y-(this.r+3), 3*this.r, 3*this.r);
   }
   this.collide = function()
   {
@@ -109,11 +110,12 @@ function sunlightParticle(x,y)
   this.r = 7;
   this.draw = function()
   {
-    context.fillStyle = 'yellow';
-    context.beginPath();
-    context.arc(this.x, this.y, this.r, Math.PI*2, false) 
-    context.stroke();
-    context.fill()
+    //context.fillStyle = 'yellow';
+    //context.beginPath();
+    //context.arc(this.x, this.y, this.r, Math.PI*2, false) 
+    //context.stroke();
+    //context.fill();
+    context.drawImage(sunlight, this.x-16, this.y-16, 32,32);
   } // sunlight draw
   this.collide = function()
   {

@@ -101,6 +101,16 @@ zooxEyes.src = '../data/zooxEyes.gif';
 zooxEyes.width = 320;
 zooxEyes.height = 64;
 
+var sunlight = new Image();
+sunlight.src = '../data/sunlight.gif';
+sunlight.width = 64;
+sunlight.height = 64;
+
+var zooxFood = new Image();
+zooxFood.src = '../data/zooxFood.gif';
+zooxFood.width = 64;
+zooxFood.height = 64;
+
 //audio
 var music = new Audio('../data/Green-Bird.mp3');
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
