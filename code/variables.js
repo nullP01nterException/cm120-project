@@ -90,7 +90,17 @@ var keyDown = false;
 //gameState
 var win = null;
 
+//pictures
+var zooxBody = new Image();
+zooxBody.src = '../data/zooxBody.gif';
+zooxBody.width = 64;
+zooxBody.height = 64;
+
+var zooxEyes = new Image();
+zooxEyes.src = '../data/zooxEyes.gif';
+zooxEyes.width = 320;
+zooxEyes.height = 64;
+
 //audio
-var moveNoise = new Audio('../data/WaterSplash.mp3');
 var music = new Audio('../data/Green-Bird.mp3');
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');

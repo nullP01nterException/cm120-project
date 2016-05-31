@@ -55,11 +55,13 @@ function Zoox(x, y, speed, radius)
   }
   this.draw = function ()
   {
-    context.fillStyle = 'orange';
-    context.beginPath();
-    context.arc(this.x, this.y, this.r, Math.PI*2, false) 
-    context.stroke();
-    context.fill()
+    context.drawImage(zooxBody, this.x-32, this.y-32, zooxBody.width, zooxBody.height);
+    context.drawImage(zooxEyes, 0, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
+    if(right)context.drawImage(zooxEyes, 64, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
+    else if(left)context.drawImage(zooxEyes, 128, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
+    else if(up)context.drawImage(zooxEyes, 192, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
+    else if(down) context.drawImage(zooxEyes, 256, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
+    else context.drawImage(zooxEyes, 0, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
   }
   this.checkCollision = function(stuff)
   {
@@ -324,7 +326,6 @@ function audioSwitch(){
     case 38:
     case 73:
       if (upKey) {
-        	moveNoise.play();
         	upKey = false;
     	}
       break;
@@ -332,7 +333,6 @@ function audioSwitch(){
     case 37:
     case 87:
       if (leftKey) {
-        	moveNoise.play();
         	leftKey = false;
     	}
       break;
@@ -340,7 +340,6 @@ function audioSwitch(){
     case 68:
     case 76:
      if (rightKey) {
-        	moveNoise.play();
         	rightKey = false;
     	}
       break;
@@ -348,7 +347,6 @@ function audioSwitch(){
     case 75:
     case 40:
       if (downKey) {
-        	moveNoise.play();
         	downtKey = false;
     	}
       break;

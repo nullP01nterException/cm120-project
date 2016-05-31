@@ -61,7 +61,13 @@ function drawCredits(){
 	background();
 	context.font = "32px Verdana";
 	context.fillStyle = 'white';
-	context.fillText("The Fellowship of the Reef", canvas.width/2-200, canvas.height/2);
+	context.fillText("The Fellowship of the Reef", canvas.width/2-200, canvas.height/2-150);
+	context.fillText("Richard Harker        Nicole Maines", canvas.width/2-275, canvas.height/2-50);
+	context.fillText("Jolina Lam        Tommy", canvas.width/2-200, canvas.height/2);
+	context.fillText("Music from www.newgrounds.com", canvas.width/2-250, canvas.height/2 + 150);
+	context.font = "20px Verdana";
+	context.fillText("Green Bird by dferociousbeast.newgrounds.com", canvas.width/2-225, canvas.height/2+190);
+	context.fillText("Peaceful Nights by stadler.newgrounds.com", canvas.width/2-205, canvas.height/2+230);
 
 	context.fillStyle = 'blue';
 	context.fillRect(10,10,50,30);
