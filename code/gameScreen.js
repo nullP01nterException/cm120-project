@@ -21,14 +21,16 @@ function Zoox(x, y, speed, radius)
     if(player.energy <= 0) // player energy
     {
       player.energy = 0;
+	  /* if(player.s = FASTSPEED){
+		//Play slow down sound      SLOW DOWN SOUND GOES HERE, SLOW DOWN SOUND GOES HERE, SLOW DOWN SOUND GOES HERE
+	  }
+	  */
       player.s = SLOWSPEED;
     }
     else
     {
       player.energy += PLAYERENERGYRATE;
-      if(player.energy < 0)
-        player.energy = 0;
-      else if (player.energy > MAXPLAYERENERGY)
+       if (player.energy > MAXPLAYERENERGY)
         player.energy = MAXPLAYERENERGY;
       player.s = SPEED;
     }
@@ -336,9 +338,11 @@ function updateGame()
 {
 	changeGameState();
   updateCoral();
+
   
-  if(alive)
+  if(alive && state ==2)
   {
+	updateCoral();
     if(Math.random() < SILTRATE)
     {
       var temp = new Silt(Math.random()*canvas.width, 0, 5, 0, 'black', 0);
@@ -357,7 +361,7 @@ function updateGame()
           win = true;
     }
 
-    leftBoundary = canvas.width-(coralGrowthResource/coralResourceMax)*canvas.width+50;
+    leftBoundary = canvas.width-(coralGrowthResource/coralResourceMax)*canvas.width;
 
     growthCounter++;
     if(growthCounter % GROWTHTIMER === 0){
