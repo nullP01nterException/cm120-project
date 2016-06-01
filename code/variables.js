@@ -111,6 +111,8 @@ zooxFood.src = '../data/zooxFood.gif';
 zooxFood.width = 64;
 zooxFood.height = 64;
 
+var ceiling = canvas.height * 0.9; // for pushing player
+
 //audio
 var music = new Audio('../data/Green-Bird.mp3');
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
