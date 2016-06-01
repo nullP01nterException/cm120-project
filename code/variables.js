@@ -114,3 +114,6 @@ zooxFood.height = 64;
 //audio
 var music = new Audio('../data/Green-Bird.mp3');
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
+var foodSound = new Audio('../data/Climbing-cut.mp3');
+var sunSound = new Audio('../data/shooting_star-cut.mp3');
+var bounce = new Audio('../data/Cartoon_Hop-cut.mp3');

@@ -10,6 +10,7 @@ function drawWin(){
 		state = 0;
 		win = null;
 		alive = true;
+		resetGame();
 	}
 }
 
@@ -25,5 +26,6 @@ function drawLose(){
 		state = 0;
 		win = null;
 		alive = true;
+		resetGame();
 	}
 }

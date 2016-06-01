@@ -42,14 +42,22 @@ function Zoox(x, y, speed, radius)
     if(down)
       player.y += player.s;
     
-    if(player.y > lowerBoundary) // stay on the reef
+    if(player.y > lowerBoundary){ // stay on the reef
       player.y = lowerBoundary
-    if(player.y < upperBoundary)
+      bounce.play();
+    }
+    if(player.y < upperBoundary){
       player.y = upperBoundary;
-    if(player.x > rightBoundary)
+      bounce.play();
+    }
+    if(player.x > rightBoundary){
       player.x = rightBoundary;
-    if(player.x < leftBoundary)
+      bounce.play();
+    }
+    if(player.x < leftBoundary){
       player.x = leftBoundary;
+      bounce.play();
+    }
   }
     this.checkCollision(collisionObjects);
   }
@@ -92,6 +100,7 @@ function nutrientParticle(x,y)
   this.collide = function()
   {
     player.energy += NUTRIENTVALUE;
+    foodSound.play();
     this.reset();
   }
   this.reset = function()
@@ -120,6 +129,7 @@ function sunlightParticle(x,y)
   this.collide = function()
   {
     reefEnergy += SUNLIGHTVALUE;
+    sunSound.play();
     this.reset();
   } // sunlight player collision
   this.update = function()
@@ -322,43 +332,9 @@ function handleKeyUp(e)
   }
 } // handleKeyUp
 
-function audioSwitch(){
-	switch(pressedKey){
-	case 87: // up
-    case 38:
-    case 73:
-      if (upKey) {
-        	upKey = false;
-    	}
-      break;
-    case 74: // left turn
-    case 37:
-    case 87:
-      if (leftKey) {
-        	leftKey = false;
-    	}
-      break;
-    case 39: // right turn
-    case 68:
-    case 76:
-     if (rightKey) {
-        	rightKey = false;
-    	}
-      break;
-    case 83: // down
-    case 75:
-    case 40:
-      if (downKey) {
-        	downtKey = false;
-    	}
-      break;
-	}
-}
-
 function updateGame()
 {
 	changeGameState();
-	audioSwitch();
   updateCoral();
   
   if(alive)
