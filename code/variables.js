@@ -102,18 +102,49 @@ zooxEyes.width = 320;
 zooxEyes.height = 64;
 
 var sunlight = new Image();
-sunlight.src = '../data/sunlight.gif';
+sunlight.src = '../data/sun.png';
 sunlight.width = 64;
 sunlight.height = 64;
 
 var zooxFood = new Image();
-zooxFood.src = '../data/zooxFood.gif';
+zooxFood.src = '../data/food.png';
 zooxFood.width = 64;
 zooxFood.height = 64;
+
+//star pictures
+var star1 = new Image();
+star1.src = '../data/star1.png';
+
+var star2 = new Image();
+star2.src = '../data/star2.png';
+
+var star3 = new Image();
+star3.src = '../data/star3.png';
+
+var star4 = new Image();
+star4.src = '../data/star4.png';
+
+var star5 = new Image();
+star5.src = '../data/star5.png';
+
+var star6 = new Image();
+star6.src = '../data/star6.png';
+
+var starArray = new Array();
+starArray.push(star1);
+starArray.push(star2);
+starArray.push(star3);
+starArray.push(star4);
+starArray.push(star5);
+starArray.push(star6);
+
+//variable for star flash
+var starBuffer = 0;
+var rand = Math.floor(Math.random()*6);
 
 //audio
 var music = new Audio('../data/Green-Bird.mp3');
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
 var foodSound = new Audio('../data/Climbing-cut.mp3');
-var sunSound = new Audio('../data/shooting_star-cut.mp3');
+var sunSound = new Audio('../data/Ting-cut.mp3');
 var bounce = new Audio('../data/Cartoon_Hop-cut.mp3');

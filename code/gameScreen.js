@@ -46,19 +46,19 @@ function Zoox(x, y, speed, radius)
     
     if(player.y > lowerBoundary){ // stay on the reef
       player.y = lowerBoundary
-      bounce.play();
+      //bounce.play();
     }
     if(player.y < upperBoundary){
       player.y = upperBoundary;
-      bounce.play();
+      //bounce.play();
     }
     if(player.x > rightBoundary){
       player.x = rightBoundary;
-      bounce.play();
+      //bounce.play();
     }
     if(player.x < leftBoundary){
       player.x = leftBoundary;
-      bounce.play();
+      //bounce.play();
     }
   }
     this.checkCollision(collisionObjects);
