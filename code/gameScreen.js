@@ -206,10 +206,24 @@ function Silt(x, y, radius, lifetime, color, type)
   
   this.collide = function()
   {
-    player.energy += SILTVALUE;
+    /*player.energy += SILTVALUE;
     if(player.energy < 0)
       player.energy = 0;
-    this.type = 3;
+    this.type = 3;*/
+
+    //pile pushes player
+    if (this.type == 1) {
+      player.y -= canvas.height/1000;
+      if (player.y < ceiling) {
+        player.y = ceiling;
+        if (player.x >= this.x) {
+          player.x += canvas.width/1000;
+        }
+        else {
+          player.x -= canvas.width/1000;
+        }
+      }//end if*/
+    }
   } // player collision
     
   this.siltPiling = function(obj)
@@ -386,7 +400,7 @@ function updateGame()
     {
       if(siltParticles[i].type == 3)
       {
-        console.log(collisionObjects.indexOf(siltParticles[i]));
+        //console.log(collisionObjects.indexOf(siltParticles[i]));
         siltParticles.splice(i, 1); // destroys particle
       }
       else

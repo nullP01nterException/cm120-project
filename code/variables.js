@@ -90,6 +90,8 @@ var keyDown = false;
 //gameState
 var win = null;
 
+var ceiling = canvas.height * 0.9; // for pushing player
+
 //pictures
 var zooxBody = new Image();
 zooxBody.src = '../data/zooxBody.gif';
