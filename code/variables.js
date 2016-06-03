@@ -47,7 +47,7 @@ var collisionObjects = new Array();
 
 
 var SILTRATE = .05;
-var SILTSPEED = 1.9
+var SILTSPEED = 1.9;//1.9
 var SILTVALUE = -3;
 var siltParticles = new Array();
 
@@ -91,6 +91,7 @@ var keyDown = false;
 var win = null;
 
 var ceiling = canvas.height * 0.9; // for pushing player
+var inSilt = null;// for detecting if player is in silt and slowing them down
 
 //pictures
 var zooxBody = new Image();

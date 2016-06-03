@@ -3,7 +3,7 @@ function Zoox(x, y, speed, radius)
   this.x = x;
   this.y = y;
   this.r = radius;
-  this.s = SPEED;
+  this.s = SPEED;//SPEED
   this.energy = PLAYERSTARTENERGY;
   this.getSpeed = function()
   {
@@ -18,7 +18,7 @@ function Zoox(x, y, speed, radius)
     else if (reefEnergy > MAXREEFENERGY)
       reefEnergy = MAXREEFENERGY;
     
-    if(player.energy <= 0) // player energy
+    if(player.energy <= 0 ) // player energy
     {
       player.energy = 0;
 	  /* if(player.s = FASTSPEED){
@@ -32,6 +32,14 @@ function Zoox(x, y, speed, radius)
       player.energy += PLAYERENERGYRATE;
        if (player.energy > MAXPLAYERENERGY)
         player.energy = MAXPLAYERENERGY;
+      player.s = SPEED;//SPEED
+    }
+
+    if (inSilt == true) {
+      player.s = SLOWSPEED;
+      //console.log("player.s: " + player.s)
+    }//end if
+    else if (inSilt == false){
       player.s = SPEED;
     }
     
@@ -229,12 +237,17 @@ function Silt(x, y, radius, lifetime, color, type)
     }*/
 
     //Slows player speed:
-
+    //console.log(inSilt);
     if (this.type == 1) {
-      player.speed = 0.1;
-      console.log("Player speed: " + player.speed);
-      }
+      inSilt = true;
+      //console.log(inSilt);
+    }
+    else {
+      inSilt = false;
+    }
   } // player collision
+
+  inSilt = false;
     
   this.siltPiling = function(obj)
   {
@@ -247,7 +260,7 @@ function Silt(x, y, radius, lifetime, color, type)
         var index = obj.indexOf(obj[i]);
         obj.splice(index, 1);//removes particle that fell
         this.type = 1;//changes the type to a triangle
-        this.color = 'red';
+        //this.color = 'red';
         this.r = Math.sqrt(Math.pow(this.r + 3, 2)); // adds volume to pile
       }//end if
           
@@ -363,7 +376,6 @@ function updateGame()
 {
 	changeGameState();
   updateCoral();
-
   
   if(alive && state ==2)
   {
