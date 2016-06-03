@@ -11,6 +11,7 @@ function drawWin(){
 		win = null;
 		alive = true;
 		resetGame();
+		muteState = 0;
 	}
 }
 
@@ -27,5 +28,6 @@ function drawLose(){
 		win = null;
 		alive = true;
 		resetGame();
+		muteState = 0;
 	}
 }

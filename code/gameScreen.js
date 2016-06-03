@@ -46,19 +46,15 @@ function Zoox(x, y, speed, radius)
     
     if(player.y > lowerBoundary){ // stay on the reef
       player.y = lowerBoundary
-      //bounce.play();
     }
     if(player.y < upperBoundary){
       player.y = upperBoundary;
-      //bounce.play();
     }
     if(player.x > rightBoundary){
       player.x = rightBoundary;
-      //bounce.play();
     }
     if(player.x < leftBoundary){
       player.x = leftBoundary;
-      //bounce.play();
     }
   }
     this.checkCollision(collisionObjects);
@@ -423,9 +419,28 @@ function drawGame(){
   context.font = "20px Verdana";
   context.fillText("Player energy: " + Math.floor(player.energy), 10, 30);
   context.fillText("Reef energy: " + Math.floor(reefEnergy), 10, 60);
+
+//music mute
+  if(!gameMusic.muted) context.drawImage(soundIcons, 0, 0, 100, 60, 10, 10, 50, 30);
+  else context.drawImage(soundIcons, 100, 0, 100, 60, 10, 10, 50, 30);
+  
+  //SFX mute
+  if(!foodSound.muted && !sunSound.muted) context.drawImage(soundIcons, 200, 0, 100, 60, 80, 10, 50, 30);
+  else context.drawImage(soundIcons, 300, 0, 100, 60, 80, 10, 50, 30);
+
+//mute sound detect
+  if(mouseX < 60 && mouseX > 10 && mouseY < 40 && mouseY > 10) overTitleMute = true;
+  else overTitleMute = false;
+
+//mute SFX detect
+  if(mouseX < 130 && mouseX > 80 && mouseY < 40 && mouseY > 10) overMuteSFX = true;
+  else overMuteSFX = false;
 }
 
 function drawPause(){
+  drawGame();
+  context.fillStyle = 'rgba(255,255,255,0.5)';
+  context.fillRect(0,0,canvas.width, canvas.height);
 	context.font = "32px Verdana";
 	context.fillStyle = 'black';
 	context.fillText("PAUSE", canvas.width/2, canvas.height/2);

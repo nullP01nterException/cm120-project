@@ -42,6 +42,9 @@ function drawTitle(){
 		context.fillText("Credits", canvas.width/2 - 40, canvas.height/2 + 120);
 		context.fillText("Instructions", canvas.width/2 - 70, canvas.height/2 + 60);
 	}
+
+	if(!music.muted) context.drawImage(soundIcons, 0, 0, 100, 60, 10, 10, 50, 30);
+	else context.drawImage(soundIcons, 0, 0, 100, 60, 10, 10, 50, 30);
 }
 
 function drawInstructions(){
@@ -61,10 +64,11 @@ function drawCredits(){
 	background();
 	context.font = "32px Verdana";
 	context.fillStyle = 'white';
-	context.fillText("The Fellowship of the Reef", canvas.width/2-200, canvas.height/2-150);
-	context.fillText("Richard Harker        Nicole Maines", canvas.width/2-275, canvas.height/2-50);
-	context.fillText("Jolina Lam        Tommy Milne-Jones", canvas.width/2-200, canvas.height/2);
-	context.fillText("Music from www.newgrounds.com", canvas.width/2-250, canvas.height/2 + 150);
+	context.fillText("The Fellowship of the Reef", canvas.width/2-200, canvas.height/2-200);
+	context.fillText("Richard Harker        Nicole Maines", canvas.width/2-275, canvas.height/2-100);
+	context.fillText("Jolina Lam    		    Tommy Milne-Jones", canvas.width/2-255, canvas.height/2-50);
+	context.fillText("Music from www.newgrounds.com", canvas.width/2-250, canvas.height/2 + 100);
+	context.fillText("Sound Effects from www.soundbible.com", canvas.width/2-300, canvas.height/2 + 150);
 	context.font = "20px Verdana";
 	context.fillText("Green Bird by dferociousbeast.newgrounds.com", canvas.width/2-225, canvas.height/2+190);
 	context.fillText("Peaceful Nights by stadler.newgrounds.com", canvas.width/2-205, canvas.height/2+230);
@@ -104,6 +108,9 @@ function mouseOver(){
 
 		if(state == 4) overInstructBack = true;
 		else overInstructBack = false;
+
+		if(state == 0) overTitleMute = true;
+		else overTitleMute = false;
 	}
 }
 

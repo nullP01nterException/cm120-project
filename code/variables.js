@@ -28,9 +28,14 @@ var coralStemMaxY = .55; //PERCENTAGE, 0 is 100%, control is .55
 var titleOver = false;
 var titleCreditOver = false;
 var titleInstructOver = false;
+var overTitleMute = false;
+var titleSoundMuted = false;
 
 //state = 2 (gameScreen)
 var paused = false;
+var overMuteSFX = false;
+var gameSoundMuted = false;
+var SFXMuted = false;
 
 //state = 3 (credits)
 var overCreditBack = false;
@@ -113,6 +118,11 @@ zooxFood.src = '../data/food.png';
 zooxFood.width = 64;
 zooxFood.height = 64;
 
+ var soundIcons = new Image();
+ soundIcons.src = '../data/soundIcons.png';
+ soundIcons.width = 400;
+ soundIcons.height = 60;
+
 //star pictures
 var star1 = new Image();
 star1.src = '../data/star1.png';
@@ -147,6 +157,8 @@ var rand = Math.floor(Math.random()*6);
 //audio
 var music = new Audio('../data/Green-Bird.mp3');
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
+gameMusic.muted = false;
 var foodSound = new Audio('../data/Climbing-cut.mp3');
+foodSound.muted = false;
 var sunSound = new Audio('../data/Ting-cut.mp3');
-var bounce = new Audio('../data/Cartoon_Hop-cut.mp3');
+sunSound.muted = false;
