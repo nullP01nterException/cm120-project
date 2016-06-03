@@ -3,7 +3,7 @@ function Zoox(x, y, speed, radius)
   this.x = x;
   this.y = y;
   this.r = radius;
-  this.s = SPEED;
+  this.s = SPEED;//SPEED
   this.energy = PLAYERSTARTENERGY;
   this.getSpeed = function()
   {
@@ -18,7 +18,7 @@ function Zoox(x, y, speed, radius)
     else if (reefEnergy > MAXREEFENERGY)
       reefEnergy = MAXREEFENERGY;
     
-    if(player.energy <= 0) // player energy
+    if(player.energy <= 0 ) // player energy
     {
       player.energy = 0;
 	  /* if(player.s = FASTSPEED){
@@ -32,6 +32,14 @@ function Zoox(x, y, speed, radius)
       player.energy += PLAYERENERGYRATE;
        if (player.energy > MAXPLAYERENERGY)
         player.energy = MAXPLAYERENERGY;
+      player.s = SPEED;//SPEED
+    }
+
+    if (inSilt == true) {
+      player.s = SLOWSPEED;
+      //console.log("player.s: " + player.s)
+    }//end if
+    else if (inSilt == false){
       player.s = SPEED;
     }
     
@@ -73,7 +81,7 @@ function Zoox(x, y, speed, radius)
   {
     for(var i=0; i<stuff.length; i++)
     {
-      if(this.r + stuff[i].r >= Math.sqrt(Math.pow(this.x - stuff[i].x, 2) + Math.pow(this.y - stuff[i].y, 2)) && this != stuff[i])
+      if(this.r + stuff[i].r >= Math.sqrt(Math.pow(this.x - stuff[i].x, 2) + Math.pow(this.y - stuff[i].y, 2)) && this != stuff[i])//>=
       {
         stuff[i].collide();
       }
@@ -202,12 +210,15 @@ function Silt(x, y, radius, lifetime, color, type)
   
   this.collide = function()
   {
-    /*player.energy += SILTVALUE;
+
+    /*
+    //reduces player energy
+    player.energy += SILTVALUE;
     if(player.energy < 0)
       player.energy = 0;
-    this.type = 3;*/
+    this.type = 3;
 
-    //pile pushes player
+    //pile pushes player (buggy)
     if (this.type == 1) {
       player.y -= canvas.height/1000;
       if (player.y < ceiling) {
@@ -218,9 +229,21 @@ function Silt(x, y, radius, lifetime, color, type)
         else {
           player.x -= canvas.width/1000;
         }
-      }//end if*/
+      }//end if
+    }*/
+
+    //Slows player speed:
+    //console.log(inSilt);
+    if (this.type == 1) {
+      inSilt = true;
+      //console.log(inSilt);
+    }
+    else {
+      inSilt = false;
     }
   } // player collision
+
+  inSilt = false;
     
   this.siltPiling = function(obj)
   {
@@ -233,6 +256,7 @@ function Silt(x, y, radius, lifetime, color, type)
         var index = obj.indexOf(obj[i]);
         obj.splice(index, 1);//removes particle that fell
         this.type = 1;//changes the type to a triangle
+        //this.color = 'red';
         this.r = Math.sqrt(Math.pow(this.r + 3, 2)); // adds volume to pile
       }//end if
           
@@ -348,7 +372,6 @@ function updateGame()
 {
 	changeGameState();
   updateCoral();
-
   
   if(alive && state ==2)
   {
