@@ -2,7 +2,16 @@ var coralColor = new Image();
 
 coralColor.src = "../data/coralRipple.png";
 
+var coralColorTinted = new Image();
+
+coralColorTinted.src = "../data/coralRippleTinted.png"
+
+var coralColorTinted2 = new Image();
+
+coralColorTinted2.src = "../data/coralRippleTinted2.png"
+
 var coralStarter = true,
+    tintedCoralStarter = true,
   u0 = 0,
   u1 = 0;
 
@@ -42,6 +51,7 @@ var reefArray = new Array();
 function coralReset(){
 coralResource = coralResourceOG;
 coralGrowthResource = coralResource;
+tintedCoralStarter = true;
   for (var outer = 0; outer < reefArray.length; outer++) {
   	for (var inner = 0; inner < reefArray[outer].length; inner++ ){
     reefArray[outer][inner].t = 0;
@@ -170,14 +180,86 @@ var inner = currentInner;
   }
 }
 
+function tintedCoralInitialize(){
+  coralResource = 3000;
+  for(var iter = numTrees; iter < numTrees*3+1; iter++){
+    reefArray[iter] = new Array(); // reefArray[] = trees
+    reefArray[iter][0] = new coralBranchObj(); //reef Array[][] = branches
+  }
+
+  for(var outer = numTrees*2; outer < numTrees*3; outer++){
+    reefArray[outer][0].botCoralX = reefArray[outer-numTrees*2][0].botCoralX - .25*(canvas.width/numTrees);
+    reefArray[outer][0].curBotX = reefArray[outer][0].botCoralX;
+    reefArray[outer][0].botCoralY = canvas.height;
+    reefArray[outer][0].curBotY =  reefArray[outer][0].botCoralY;
+    
+    reefArray[outer][0].topCoralX = reefArray[outer][0].botCoralX - stemLeanMax + Math.random()*2*stemLeanMax;
+    reefArray[outer][0].topCoralY = canvas.height*coralStemMaxY+ Math.random()*.2*canvas.height -160; // WAS 200
+    reefArray[outer][0].t = 0;
+    
+    controlPointTuning(outer,0);
+  }
+
+  for(var outer = numTrees; outer < numTrees*2; outer++){
+
+  reefArray[outer][0].botCoralX = reefArray[outer-numTrees][0].botCoralX - .5*(canvas.width/numTrees);
+  reefArray[outer][0].curBotX = reefArray[outer][0].botCoralX;
+  reefArray[outer][0].botCoralY = canvas.height;
+  reefArray[outer][0].curBotY =  reefArray[outer][0].botCoralY;
+  
+      reefArray[outer][0].topCoralX = reefArray[outer][0].botCoralX - stemLeanMax + Math.random()*2*stemLeanMax;
+  reefArray[outer][0].topCoralY = canvas.height*coralStemMaxY+ Math.random()*.2*canvas.height -100; // WAS 200
+  reefArray[outer][0].t = 0;
+  
+    controlPointTuning(outer,0);
+    
+  }
+
+  ////First tree stoof [Added to fill right side]
+  reefArray[numTrees*2][0].botCoralX = reefArray[0][0].botCoralX + .5*(canvas.width/numTrees);
+  reefArray[numTrees*2][0].curBotX = reefArray[numTrees*2][0].botCoralX;
+  reefArray[numTrees*2][0].botCoralY = canvas.height;
+  reefArray[numTrees*2][0].curBotY =  reefArray[numTrees*2][0].botCoralY;
+  
+  reefArray[numTrees*2][0].topCoralX = reefArray[numTrees*2][0].botCoralX - stemLeanMax + Math.random()*2*stemLeanMax;
+  reefArray[numTrees*2][0].topCoralY = canvas.height*coralStemMaxY+ Math.random()*.2*canvas.height -100;
+  reefArray[numTrees*2][0].t = 0;
+
+  controlPointTuning(numTrees*2,0);
+}
+
 function updateCoral() {
   if (coralStarter == true) {
     coralStarter = false;
     coralStart();
   }
+  if (tintedCoralStarter == true && coralGrowthResource > numTrees*100){
+    tintedCoralStarter = false;
+    tintedCoralInitialize();
+  }
   //Time updater!
     coralUpdateCont();
-  for (var outer = 0; outer < reefArray.length; outer++){
+
+  if (tintedCoralStarter == false){
+    for (var outer = numTrees; outer < numTrees*2+1; outer++){
+      for (var inner = 0; inner < reefArray[outer].length; inner++){
+        if (reefArray[outer][inner].t <= 1){
+          reefArray[outer][inner].t += growthSpeed*4;
+        }
+      }
+    }
+    if(coralGrowthResource > 2040){
+      for (var outer = numTrees*2+1; outer < numTrees*3; outer++){
+        for (var inner = 0; inner < reefArray[outer].length; inner++){
+          if (reefArray[outer][inner].t <= 1){
+            reefArray[outer][inner].t += growthSpeed*4;
+          }
+        }
+      }
+    }
+  }
+
+  for (var outer = 0; outer < numTrees; outer++){
   	for (var inner = 0; inner < reefArray[outer].length; inner++){
     	if (reefArray[outer][inner].t*100 < coralGrowthResource - outer*100 -inner/(numBranches-1)*100){
       	if (reefArray[outer][inner].t > 1){
@@ -199,9 +281,53 @@ function updateCoral() {
 function drawCoral() {
     //context.fillText(coralResource,400,30);
     //context.fillText(coralGrowthResource,400,60);
-    var coralPattern = context.createPattern(coralColor, "repeat");
+
+  if (tintedCoralStarter == false){
+    coralPattern = context.createPattern(coralColorTinted2, "repeat");
     context.fillStyle = coralPattern;
-  for (var outer = 0; outer < reefArray.length; outer++){
+    for (var outer = numTrees*2+1; outer < reefArray.length; outer++){
+      for (var inner =0; inner < reefArray[outer].length; inner++){
+        var coralPattern = context.createPattern(coralColorTinted2, "repeat");
+        context.strokeStyle = coralPattern;
+        context.beginPath();
+        context.moveTo(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY);
+        context.bezierCurveTo(reefArray[outer][inner].curCp2X, reefArray[outer][inner].curCp2Y, reefArray[outer][inner].curCp1X, reefArray[outer][inner].curCp1Y, reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY);
+        context.lineWidth = 8;
+        context.stroke();
+        if(reefArray[outer][inner].t > 0){
+        context.beginPath();
+        context.arc(reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY,2.5,0,2*Math.PI);
+        context.arc(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY,2.5,0,2*Math.PI);
+        context.fill();
+        }
+      }
+    }
+
+
+      var coralPattern = context.createPattern(coralColorTinted, "repeat");
+      context.fillStyle = coralPattern;
+    for (var outer = numTrees; outer < numTrees*2+1; outer++){
+      for (var inner =0; inner < reefArray[outer].length; inner++){
+        var coralPattern = context.createPattern(coralColorTinted, "repeat");
+        context.strokeStyle = coralPattern;
+        context.beginPath();
+        context.moveTo(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY);
+        context.bezierCurveTo(reefArray[outer][inner].curCp2X, reefArray[outer][inner].curCp2Y, reefArray[outer][inner].curCp1X, reefArray[outer][inner].curCp1Y, reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY);
+        context.lineWidth = 8;
+        context.stroke();
+        if(reefArray[outer][inner].t > 0){
+        context.beginPath();
+        context.arc(reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY,2.5,0,2*Math.PI);
+        context.arc(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY,2.5,0,2*Math.PI);
+        context.fill();
+        }
+      }
+    }
+  }
+
+  var coralPattern = context.createPattern(coralColor, "repeat");
+  context.fillStyle = coralPattern;
+  for (var outer = 0; outer < numTrees; outer++){
     for (var inner =0; inner < reefArray[outer].length; inner++){
       var coralPattern = context.createPattern(coralColor, "repeat");
       context.strokeStyle = coralPattern;
