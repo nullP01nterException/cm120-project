@@ -77,7 +77,7 @@ function Zoox(x, y, speed, radius)
   {
     for(var i=0; i<stuff.length; i++)
     {
-      if(this.r + stuff[i].r >= Math.sqrt(Math.pow(this.x - stuff[i].x, 2) + Math.pow(this.y - stuff[i].y, 2)) && this != stuff[i])
+      if(this.r + stuff[i].r >= Math.sqrt(Math.pow(this.x - stuff[i].x, 2) + Math.pow(this.y - stuff[i].y, 2)) && this != stuff[i])//>=
       {
         stuff[i].collide();
       }
@@ -206,12 +206,15 @@ function Silt(x, y, radius, lifetime, color, type)
   
   this.collide = function()
   {
-    /*player.energy += SILTVALUE;
+
+    /*
+    //reduces player energy
+    player.energy += SILTVALUE;
     if(player.energy < 0)
       player.energy = 0;
-    this.type = 3;*/
+    this.type = 3;
 
-    //pile pushes player
+    //pile pushes player (buggy)
     if (this.type == 1) {
       player.y -= canvas.height/1000;
       if (player.y < ceiling) {
@@ -222,8 +225,15 @@ function Silt(x, y, radius, lifetime, color, type)
         else {
           player.x -= canvas.width/1000;
         }
-      }//end if*/
-    }
+      }//end if
+    }*/
+
+    //Slows player speed:
+
+    if (this.type == 1) {
+      player.speed = 0.1;
+      console.log("Player speed: " + player.speed);
+      }
   } // player collision
     
   this.siltPiling = function(obj)
@@ -237,6 +247,7 @@ function Silt(x, y, radius, lifetime, color, type)
         var index = obj.indexOf(obj[i]);
         obj.splice(index, 1);//removes particle that fell
         this.type = 1;//changes the type to a triangle
+        this.color = 'red';
         this.r = Math.sqrt(Math.pow(this.r + 3, 2)); // adds volume to pile
       }//end if
           
