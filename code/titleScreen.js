@@ -44,7 +44,7 @@ function drawTitle(){
 	}
 
 	if(!music.muted) context.drawImage(soundIcons, 0, 0, 100, 60, 10, 10, 50, 30);
-	else context.drawImage(soundIcons, 0, 0, 100, 60, 10, 10, 50, 30);
+	else context.drawImage(soundIcons, 100, 0, 100, 60, 10, 10, 50, 30);
 }
 
 function drawInstructions(){
