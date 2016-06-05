@@ -3,7 +3,7 @@ function Zoox(x, y, speed, radius)
   this.x = x;
   this.y = y;
   this.r = radius;
-  this.s = SPEED;//SPEED
+  this.s = SPEED;
   this.energy = PLAYERSTARTENERGY;
   this.getSpeed = function()
   {
@@ -96,11 +96,6 @@ function nutrientParticle(x,y)
   this.r = Math.random()*2 + 4;
   this.draw = function()
   {
-    //context.fillStyle = 'brown';
-    //context.beginPath();
-   // context.arc(this.x, this.y, this.r, Math.PI*2, false) 
-   //context.stroke();
-    //context.fill()
     context.drawImage(zooxFood, this.x-(this.r+3), this.y-(this.r+3), 3*this.r, 3*this.r);
   }
   this.collide = function()
@@ -125,13 +120,9 @@ function sunlightParticle(x,y)
   this.r = 7;
   this.draw = function()
   {
-    //context.fillStyle = 'yellow';
-    //context.beginPath();
-    //context.arc(this.x, this.y, this.r, Math.PI*2, false) 
-    //context.stroke();
-    //context.fill();
     context.drawImage(sunlight, this.x-16, this.y-16, 32,32);
   } // sunlight draw
+
   this.collide = function()
   {
     reefEnergy += SUNLIGHTVALUE;
@@ -151,15 +142,18 @@ function sunlightParticle(x,y)
   } // sunlight reset
 } // sunlight particle
 
-function Silt(x, y, radius, lifetime, color, type)
+function Silt(x, y, radius, speed, accel, angle, color, type)//(x, y, radius, lifetime, color, type) 
 { //creating Particle object, lifetime: how long on screen
   this.x = x;
   this.y = y;
   this.r = radius;
   this.speed = SILTSPEED;
-  this.lifetime = lifetime;
+  this.accel = accel;
   this.color = color;
   this.type = type; //0 = circle, 1 = triangle
+
+  var angleInRadians = angle * Math.PI / 180;
+  this.velocity = Math.random()*4 * Math.cos(angleInRadians);
 
   this.draw = function()
   {
@@ -191,13 +185,16 @@ function Silt(x, y, radius, lifetime, color, type)
 
   this.update = function()
   {
-    if (this.lifetime > 0 || this.y < canvas.height)
+    //Types and piling initialization
+    if (this.y < canvas.height)
     {
-      this.y += this.speed * 0.5; //moves y down particles[i].speed0.3
-      this.lifetime--;
+      this.speed = this.speed + this.accel;
+      this.x = this.x - this.velocity - this.accel;
+      this.y = this.y + this.speed;
     }
     if (this.y > canvas.height && this.type != 2)
     {
+      this.y = canvas.height;
       if(this.type != 3)
         this.type = 1; // becomes a triangle at the bottom unless it is already set to be destroyed
     } //end if
@@ -206,37 +203,14 @@ function Silt(x, y, radius, lifetime, color, type)
       //resets the projectile as a regular silt particle
       this.type = 3; // self destruct
     } //end else if
+
   } //end update
   
   this.collide = function()
   {
-
-    /*
-    //reduces player energy
-    player.energy += SILTVALUE;
-    if(player.energy < 0)
-      player.energy = 0;
-    this.type = 3;
-
-    //pile pushes player (buggy)
-    if (this.type == 1) {
-      player.y -= canvas.height/1000;
-      if (player.y < ceiling) {
-        player.y = ceiling;
-        if (player.x >= this.x) {
-          player.x += canvas.width/1000;
-        }
-        else {
-          player.x -= canvas.width/1000;
-        }
-      }//end if
-    }*/
-
     //Slows player speed:
-    //console.log(inSilt);
     if (this.type == 1) {
       inSilt = true;
-      //console.log(inSilt);
     }
     else {
       inSilt = false;
@@ -256,7 +230,6 @@ function Silt(x, y, radius, lifetime, color, type)
         var index = obj.indexOf(obj[i]);
         obj.splice(index, 1);//removes particle that fell
         this.type = 1;//changes the type to a triangle
-        //this.color = 'red';
         this.r = Math.sqrt(Math.pow(this.r + 3, 2)); // adds volume to pile
       }//end if
           
@@ -372,13 +345,25 @@ function updateGame()
 {
 	changeGameState();
   updateCoral();
+  sprayCount++;
+
+  if (sprayCount%500 == 0) {
+    sprayCount = 0;
+    sprayLeft = !sprayLeft;
+  }
   
   if(alive && state ==2)
   {
 	updateCoral();
     if(Math.random() < SILTRATE)
     {
-      var temp = new Silt(Math.random()*canvas.width, 0, 5, 0, 'black', 0);
+      var temp;
+      if (!sprayLeft) {
+        temp = new Silt(canvas.width, range(50,100), 5, Math.random()*2, range(0.01, 0.1), range(-90, 0), 'black', 0);
+      }
+      else {
+         temp = new Silt(0, range(50,100), 5, Math.random()*2, range(0.01, 0.1), range(90, 180), 'black', 0);
+      }
       updateObjects.push(temp);
       drawObjects.push(temp);
       collisionObjects.push(temp);
@@ -431,8 +416,6 @@ function updateGame()
 function drawGame(){
 	drawWave();
   drawCoral();
-  //context.fillStyle = 'green';
-  //context.fillRect(leftBoundary,upperBoundary,canvas.width, canvas.height); 
   
   for(var i=drawObjects.length-1; i>=0; i--)
   {

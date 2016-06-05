@@ -51,7 +51,7 @@ var drawObjects = new Array();
 var collisionObjects = new Array();
 
 
-var SILTRATE = .05;
+var SILTRATE = .05;//.05
 var SILTSPEED = 1.9;//1.9
 var SILTVALUE = -3;
 var siltParticles = new Array();
@@ -163,3 +163,7 @@ var foodSound = new Audio('../data/Climbing-cut.mp3');
 foodSound.muted = false;
 var sunSound = new Audio('../data/Ting-cut.mp3');
 sunSound.muted = false;
+
+//silt spraying variable
+var sprayLeft = true;
+var sprayCount = 0;
