@@ -20,7 +20,7 @@ function init(){
 }
 
 function gameState(state){
-//console.log(state);
+
 	switch(state){
 		case 0:
 			updateTitle();

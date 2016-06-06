@@ -41,6 +41,4 @@ document.addEventListener('click', function(e){
     	sunSound.muted = !sunSound.muted;
     	SFXMuted = !SFXMuted;
     }
-
-    console.log(gameSoundMuted + ", " + SFXMuted);
   }, false);

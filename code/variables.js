@@ -157,6 +157,7 @@ var rand = Math.floor(Math.random()*6);
 
 //audio
 var music = new Audio('../data/Green-Bird.mp3');
+music.muted = false;
 var gameMusic = new Audio('../data/Peaceful-Nights-.mp3');
 gameMusic.muted = false;
 var foodSound = new Audio('../data/Climbing-cut.mp3');

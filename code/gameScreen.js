@@ -440,8 +440,8 @@ function drawGame(){
   }
   context.fillStyle = "#000000";
   context.font = "20px Verdana";
-  context.fillText("Player energy: " + Math.floor(player.energy), 10, 30);
-  context.fillText("Reef energy: " + Math.floor(reefEnergy), 10, 60);
+  //context.fillText("Player energy: " + Math.floor(player.energy), 10, 30);
+  //context.fillText("Reef energy: " + Math.floor(reefEnergy), 10, 60);
 
 //music mute
   if(!gameMusic.muted) context.drawImage(soundIcons, 0, 0, 100, 60, 10, 10, 50, 30);

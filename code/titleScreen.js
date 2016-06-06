@@ -52,6 +52,7 @@ function drawInstructions(){
 	context.font = "32px Verdana";
 	context.fillStyle = 'white';
 	context.fillText("Use the arrow keys to play", canvas.width/2-200, canvas.height/2);
+	context.fillText("Press ESC to pause/unpause", canvas.width/2-215, canvas.height/2+50);
 
 	context.fillStyle = 'blue';
 	context.fillRect(10,10,50,30);
@@ -104,13 +105,12 @@ function mouseOver(){
 
 	if(mouseX < 60 && mouseX > 10 && mouseY < 40 && mouseY > 10){
 		if(state == 3) overCreditBack = true;
-		else overCreditBack = false;
-
 		if(state == 4) overInstructBack = true;
-		else overInstructBack = false;
-
 		if(state == 0) overTitleMute = true;
-		else overTitleMute = false;
+	}else{
+		overCreditBack = false;
+		overInstructBack = false;
+		overTitleMute = false;
 	}
 }
 
