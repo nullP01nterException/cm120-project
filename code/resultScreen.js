@@ -1,11 +1,6 @@
 function drawWin(){
 	drawWave();
-
-	//draw tinted coral
-	//tint initialize
-	//tintedCoralUpdate();
 	updateCoral();
-	//tintedCoralDraw();
 	drawCoral();
 	context.font = "32px Verdana";
 	context.fillStyle = 'white';
@@ -23,7 +18,9 @@ function drawWin(){
 }
 
 function drawLose(){
-	background();
+	//background();
+	drawWave();
+	drawCoral();
 	context.font = "32px Verdana";
 	context.fillStyle = 'white';
 	context.fillText("You Lose...", canvas.width/2-50, canvas.height/2);

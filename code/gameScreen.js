@@ -338,6 +338,7 @@ function handleKeyUp(e)
     case 40:
       down = false;
       break;
+    case 48: state = 7; //0 key --> game loss with player kill
   }
 } // handleKeyUp
 
