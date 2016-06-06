@@ -62,3 +62,7 @@ function sparkle(x, y){
 	}
 	context.drawImage(starArray[rand], x, y, 64,64);
 }
+
+function range(min, max){
+  return Math.random() * (max - min) + min; //get a random number in a certain range
+}

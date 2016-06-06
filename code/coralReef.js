@@ -1,14 +1,16 @@
 var coralColor = new Image();
-
 coralColor.src = "../data/coralRipple.png";
 
 var coralColorTinted = new Image();
-
-coralColorTinted.src = "../data/coralRippleTinted.png"
+coralColorTinted.src = "../data/coralRippleTinted.png";
 
 var coralColorTinted2 = new Image();
+coralColorTinted2.src = "../data/coralRippleTinted2.png";
 
-coralColorTinted2.src = "../data/coralRippleTinted2.png"
+var coralColorBW = new Image();
+coralColorBW.src = "../data/coralRippleBW2.png";
+
+var fadeBW = 0;
 
 var coralStarter = true,
     tintedCoralStarter = true,
@@ -49,6 +51,7 @@ var coralTreeArray = new Array();
 var reefArray = new Array();
 
 function coralReset(){
+fadeBW = 0;
 coralResource = coralResourceOG;
 coralGrowthResource = coralResource;
 tintedCoralStarter = true;
@@ -238,7 +241,9 @@ function updateCoral() {
     tintedCoralInitialize();
   }
   //Time updater!
+  if (tintedCoralStarter == true){
     coralUpdateCont();
+  }
 
   if (tintedCoralStarter == false){
     for (var outer = numTrees; outer < numTrees*2+1; outer++){
@@ -337,13 +342,59 @@ function drawCoral() {
       context.lineWidth = 8;
       context.stroke();
       if(reefArray[outer][inner].t > 0){
-      context.beginPath();
-      context.arc(reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY,2.5,0,2*Math.PI);
-      context.arc(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY,2.5,0,2*Math.PI);
-      context.fill();
+        context.beginPath();
+        context.arc(reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY,2.5,0,2*Math.PI);
+        context.arc(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY,2.5,0,2*Math.PI);
+        context.fill();
       }
+      /*
+      if(reefArray[outer][inner].t < 1 && reefEnergy > 0){
+        sparkle(reefArray[outer][inner].curTopX,reefArray[outer][inner].curTopY);
+      }
+      */
     }
   }
+  if(state==7){
+    var coralPattern = context.createPattern(coralColorBW, "repeat");
+    context.fillStyle = coralPattern;
+    var coralPattern = context.createPattern(coralColorBW, "repeat");
+    context.strokeStyle = coralPattern;
+    context.lineWidth = 8;
+    context.globalAlpha = fadeBW;
+    if (fadeBW <1){
+      fadeBW += .01
+    }
+    for (var outer = 0; outer < numTrees; outer++){
+      for (var inner =0; inner < reefArray[outer].length; inner++){
+        context.beginPath();
+        context.moveTo(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY);
+        context.bezierCurveTo(reefArray[outer][inner].curCp2X, reefArray[outer][inner].curCp2Y, reefArray[outer][inner].curCp1X, reefArray[outer][inner].curCp1Y, reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY);
+        context.stroke();
+        if(reefArray[outer][inner].t > 0){
+          context.beginPath();
+          context.arc(reefArray[outer][inner].curTopX, reefArray[outer][inner].curTopY,2.5,0,2*Math.PI);
+          context.arc(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY,2.5,0,2*Math.PI);
+          context.fill();
+        }
+      }
+    }
+    context.globalAlpha = 1;
+    /////Drawing player in loss screen, looks ugly in order to manage proper layering
+    if (coralGrowthResource > 0 ){
+      context.drawImage(zooxBody, player.x-32, player.y-32, zooxBody.width, zooxBody.height);
+      context.globalAlpha = fadeBW;
+      context.drawImage(zooxBodyBW, player.x-32, player.y-32, zooxBody.width, zooxBody.height);
+      context.globalAlpha = 1;
+      if(right)context.drawImage(zooxEyes, 64, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
+      else if(left)context.drawImage(zooxEyes, 128, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
+      else if(up)context.drawImage(zooxEyes, 192, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
+      else if(down) context.drawImage(zooxEyes, 256, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
+      else context.drawImage(zooxEyes, 0, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
+      //end of draw zoox loss screen
+    }
+  }
+
+
   context.fillStyle = 'black';
   context.strokeStyle = 'black';
   context.lineWidth = 2;
