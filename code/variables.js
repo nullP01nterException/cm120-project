@@ -104,6 +104,9 @@ zooxBody.src = '../data/zooxBody.gif';
 zooxBody.width = 64;
 zooxBody.height = 64;
 
+var zooxBodyBW = new Image();
+zooxBodyBW.src = '../data/zooxBody.png';
+
 var zooxEyes = new Image();
 zooxEyes.src = '../data/zooxEyes.gif';
 zooxEyes.width = 320;
