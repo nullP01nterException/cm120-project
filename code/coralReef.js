@@ -11,6 +11,7 @@ var coralColorBW = new Image();
 coralColorBW.src = "../data/coralRippleBW2.png";
 
 var fadeBW = 0;
+var fadeBWPlayer= 0;
 
 var coralStarter = true,
     tintedCoralStarter = true,
@@ -52,6 +53,7 @@ var reefArray = new Array();
 
 function coralReset(){
 fadeBW = 0;
+fadeBWPlayer = 0;
 coralResource = coralResourceOG;
 coralGrowthResource = coralResource;
 tintedCoralStarter = true;
@@ -241,7 +243,7 @@ function updateCoral() {
     tintedCoralInitialize();
   }
   //Time updater!
-  if (tintedCoralStarter == true){
+  if (coralGrowthResource <110*numTrees){
     coralUpdateCont();
   }
 
@@ -362,7 +364,10 @@ function drawCoral() {
     context.lineWidth = 8;
     context.globalAlpha = fadeBW;
     if (fadeBW <1){
-      fadeBW += .01
+      fadeBW += .01;
+    }
+    if (fadeBWPlayer < 1){
+      fadeBWPlayer += .01;
     }
     for (var outer = 0; outer < numTrees; outer++){
       for (var inner =0; inner < reefArray[outer].length; inner++){
@@ -379,19 +384,6 @@ function drawCoral() {
       }
     }
     context.globalAlpha = 1;
-    /////Drawing player in loss screen, looks ugly in order to manage proper layering
-    if (coralGrowthResource > 0 ){
-      context.drawImage(zooxBody, player.x-32, player.y-32, zooxBody.width, zooxBody.height);
-      context.globalAlpha = fadeBW;
-      context.drawImage(zooxBodyBW, player.x-32, player.y-32, zooxBody.width, zooxBody.height);
-      context.globalAlpha = 1;
-      if(right)context.drawImage(zooxEyes, 64, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
-      else if(left)context.drawImage(zooxEyes, 128, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
-      else if(up)context.drawImage(zooxEyes, 192, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
-      else if(down) context.drawImage(zooxEyes, 256, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
-      else context.drawImage(zooxEyes, 0, 0, 64, zooxEyes.height, player.x-32, player.y-32, 64, zooxEyes.height);
-      //end of draw zoox loss screen
-    }
   }
 
 

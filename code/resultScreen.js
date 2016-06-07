@@ -1,4 +1,5 @@
 function drawWin(){
+	coralResource = 200*numTrees;
 	drawWave();
 	updateCoral();
 	drawCoral();
@@ -18,9 +19,20 @@ function drawWin(){
 }
 
 function drawLose(){
-	//background();
 	drawWave();
 	drawCoral();
+	///// Drawing silt pile in loss screen
+	for(var i=drawObjects.length-1; i>=0; i--)
+  	{
+  		if (drawObjects[i].type == 1){
+  		   	drawObjects[i].draw();
+  		}
+  	}
+  	///// Drawing player in loss screen
+    if (coralGrowthResource > 0 ){
+      player.draw();
+    }
+
 	context.font = "32px Verdana";
 	context.fillStyle = 'white';
 	context.fillText("You Lose...", canvas.width/2-50, canvas.height/2);

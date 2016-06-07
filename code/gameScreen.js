@@ -36,13 +36,23 @@ function Zoox(x, y, speed, radius)
     }
 
     if (inSilt == true) {
-      player.s = SLOWSPEED;
+      player.s = REALLYSLOWSPEED;
+        if(fadeBWPlayer < 1){
+          fadeBWPlayer += .01; //Drawing faded sprite over player sprite
+        }else if (fadeBWPlayer > 1){
+          state = 7;
+        }
       //console.log("player.s: " + player.s)
     }//end if
     else if (inSilt == false){
-      player.s = SPEED;
+      if(fadeBWPlayer > 0 && fadeBWPlayer < 1){
+        fadeBWPlayer -= .01; //removing faded sprite over player sprite
+      }
+      if(fadeBWPlayer < 0){
+        fadeBWPlayer = 0;
+      }
+      //player.s = SPEED;
     }
-    
     if(up) // player movement
       player.y -= player.s;
     if(left)
@@ -70,6 +80,9 @@ function Zoox(x, y, speed, radius)
   this.draw = function ()
   {
     context.drawImage(zooxBody, this.x-32, this.y-32, zooxBody.width, zooxBody.height);
+    context.globalAlpha = fadeBWPlayer;
+    context.drawImage(zooxBodyBW, this.x-32, this.y-32, zooxBody.width, zooxBody.height);
+    context.globalAlpha = 1;
     context.drawImage(zooxEyes, 0, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
     if(right)context.drawImage(zooxEyes, 64, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
     else if(left)context.drawImage(zooxEyes, 128, 0, 64, zooxEyes.height, this.x-32, this.y-32, 64, zooxEyes.height);
@@ -281,6 +294,8 @@ function resetGame()
   score = 0;
   reefEnergy = REEFSTARTENERGY;
   alive = true;
+  sprayLeft = true;
+  sprayCount = 0;
 } // reset game
 
 function handleKeyDown(e)
@@ -338,14 +353,13 @@ function handleKeyUp(e)
     case 40:
       down = false;
       break;
-    case 48: state = 7; //0 key --> game loss with player kill
   }
 } // handleKeyUp
 
 function updateGame()
 {
 	changeGameState();
-  updateCoral();
+  //updateCoral();
   sprayCount++;
 
   if (sprayCount%500 == 0) {
@@ -360,7 +374,7 @@ function updateGame()
     {
       var temp;
       if (!sprayLeft) {
-        temp = new Silt(canvas.width, range(50,100), 5, Math.random()*2, range(0.01, 0.1), range(-90, 0), 'black', 0);
+        temp = new Silt(canvas.width, range(50,100), 5, .3 + Math.random()*1.7, range(0.01, 0.05), range(-90, 0), 'black', 0);
       }
       else {
          temp = new Silt(0, range(50,100), 5, Math.random()*2, range(0.01, 0.1), range(90, 180), 'black', 0);
