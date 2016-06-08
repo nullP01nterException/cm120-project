@@ -7,7 +7,9 @@ function drawWin(){
 	context.fillStyle = 'white';
 	context.fillText("You Win!", canvas.width/2-50, canvas.height/2);
 	context.font = "25px Verdana";
-	context.fillText("Click to return to main menu", canvas.width/2-175, canvas.height/2+50);
+	context.fillText("Click to return to main menu", canvas.width/2-150, canvas.height/2+50);
+	gameMusic.pause();
+	gameMusic.currentTime = 0;
 
 	if(mouseClicked){
 		state = 0;
@@ -15,6 +17,7 @@ function drawWin(){
 		alive = true;
 		resetGame();
 		muteState = 0;
+		musc.play();
 	}
 }
 
@@ -37,7 +40,9 @@ function drawLose(){
 	context.fillStyle = 'white';
 	context.fillText("You Lose...", canvas.width/2-50, canvas.height/2);
 	context.font = "25px Verdana";
-	//context.fillText("Click to return to main menu", canvas.width/2-175, canvas.height/2+50);
+	context.fillText("Click to return to main menu", canvas.width/2-150, canvas.height/2+50);
+	gameMusic.pause();
+	gameMusic.currentTime = 0;
 
 	if(mouseClicked){
 		state = 0;
@@ -45,5 +50,8 @@ function drawLose(){
 		alive = true;
 		resetGame();
 		muteState = 0;
+		gameMusic.pause();
+		gameMusic.currentTime = 0;
+		musc.play();
 	}
 }
