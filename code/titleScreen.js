@@ -53,6 +53,11 @@ function drawInstructions(){
 	context.fillStyle = 'white';
 	context.fillText("Use the arrow keys to play", canvas.width/2-200, canvas.height/2);
 	context.fillText("Press ESC to pause/unpause", canvas.width/2-215, canvas.height/2+50);
+	context.font = "25px Verdana";
+	context.drawImage(sunlight, canvas.width/2-225, canvas.height/2+100, sunlight.width/2, sunlight.height/2);
+	context.fillText("Collect these to build your home", canvas.width/2-175, canvas.height/2+130);
+	context.drawImage(zooxFood, canvas.width/2-225, canvas.height/2+150, zooxFood.width/2, zooxFood.height/2);
+	context.fillText("Collect these move faster", canvas.width/2-175, canvas.height/2+180);
 
 	context.fillStyle = 'blue';
 	context.fillRect(10,10,50,30);

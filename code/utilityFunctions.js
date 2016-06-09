@@ -56,11 +56,11 @@ function animatePlayer(spritesheet, x, y, row) {
 
 function sparkle(x, y){
 	starBuffer++;
-	if(starBuffer%7 == 0){
+	if(starBuffer%40 == 0){
 		rand = Math.floor(Math.random()*6);
 		starBuffer = 0;
 	}
-	context.drawImage(starArray[rand], x, y, 64,64);
+	context.drawImage(starArray[rand], x-16, y-16, 32,32);
 }
 
 function range(min, max){

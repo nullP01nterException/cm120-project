@@ -349,11 +349,11 @@ function drawCoral() {
         context.arc(reefArray[outer][inner].curBotX, reefArray[outer][inner].curBotY,2.5,0,2*Math.PI);
         context.fill();
       }
-      /*
-      if(reefArray[outer][inner].t < 1 && reefEnergy > 0){
+      
+      if(reefArray[outer][inner].t > 0.01 && reefArray[outer][inner].t < 1 && reefEnergy > 0){
         sparkle(reefArray[outer][inner].curTopX,reefArray[outer][inner].curTopY);
       }
-      */
+      
     }
   }
   if(state==7){

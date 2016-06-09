@@ -374,10 +374,10 @@ function updateGame()
     {
       var temp;
       if (!sprayLeft) {
-        temp = new Silt(canvas.width, range(50,100), 5, .3 + Math.random()*1.7, range(0.01, 0.05), range(-90, 0), 'black', 0);
+        temp = new Silt(canvas.width, range(50,100), 5, 3000 + Math.random()*2, range(0.01, 0.05), range(-90, 0), 'black', 0);
       }
       else {
-         temp = new Silt(0, range(50,100), 5, Math.random()*2, range(0.01, 0.1), range(90, 180), 'black', 0);
+         temp = new Silt(0, range(50,100), 5, 3000+Math.random()*2, range(0.01, 0.05), range(90, 180), 'black', 0);
       }
       updateObjects.push(temp);
       drawObjects.push(temp);
