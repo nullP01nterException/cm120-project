@@ -184,7 +184,7 @@ function siltParticle(x, y, accel, angle){
   this.alive = true;
   this.x = x;
   this.y = y;
-  this.r = 3;
+  this.r = 4;
   this.speed = SILTSPEED;
   this.accel = accel;
   this.color = 'black';
@@ -483,7 +483,7 @@ function resetGame(){
   player = new Zoox(canvas.width/2, canvas.height/2, 0, 30);
   theNutrientSystem = new nutrientSystem(1000, 100, 15);
   theSunlightSystem = new sunlightSystem(1000, 100, 30);
-  theSiltSystem = new siltSystem(500, 30, 0);
+  theSiltSystem = new siltSystem(500, 45, 0);
   theHazardSystem = new hazardSystem(500, 3)
   updateObjects = [player, theHazardSystem, theNutrientSystem, theSunlightSystem, theSiltSystem];
   drawObjects = [player, theHazardSystem, theNutrientSystem, theSunlightSystem, theSiltSystem];
