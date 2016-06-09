@@ -50,6 +50,14 @@ var updateObjects = new Array();
 var drawObjects = new Array();
 var collisionObjects = new Array();
 
+var theHazardSystem;
+var hazards = [];
+
+var theNutrientSystem;
+var theSiltSystem;
+var theSunlightSystem;
+
+var HAZARDDEPLETIONRATE = .925;
 
 var SILTRATE = .07;//.05  Original   [Moved to .07 so silt could feasibly pile up enough to impact player, feel free to tweak - Richard]
 var SILTSPEED = 1.9;//1.9
@@ -60,21 +68,21 @@ var SPEED = 5;
 var SLOWSPEED = 2;
 var REALLYSLOWSPEED = 1;
 var SUNLIGHTSPEED = 2;
-var PLAYERENERGYRATE = -.06;
+var PLAYERENERGYRATE = -.1;
 var PLAYERSTARTENERGY = 10;
 var REEFENERGYRATE = -5;
 var REEFSTARTENERGY = 20;
 var MAXPLAYERENERGY = 3; //was 100
 var MAXREEFENERGY = 10; //was 100
 var SUNLIGHTVALUE = 5;
-var NUTRIENTVALUE = 2;
+var NUTRIENTLIFETIME = 300;
 var REEFGROWTHRATE = canvas.width / 300;
 
 var growthCounter = 0;
 var GROWTHTIMER = 4;
 
 var reefEnergy = REEFSTARTENERGY;
-var upperBoundary = canvas.height * 2 / 3;
+var upperBoundary = canvas.height * 3 / 5;
 var lowerBoundary = canvas.height;
 var rightBoundary = canvas.width;
 var leftBoundary = canvas.width / 2;
