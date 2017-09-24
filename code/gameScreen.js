@@ -559,11 +559,11 @@ function drawGame(){
   else context.drawImage(soundIcons, 300, 0, 100, 60, 80, 10, 50, 30);
 
 //mute sound detect
-  if(mouseX < 60 && mouseX > 10 && mouseY < 40 && mouseY > 10) overTitleMute = true;
+  if(mouseX < canvas.offsetLeft+60 && mouseX > canvas.offsetLeft+10 && mouseY < 40 && mouseY > 10) overTitleMute = true;
   else overTitleMute = false;
 
 //mute SFX detect
-  if(mouseX < 130 && mouseX > 80 && mouseY < 40 && mouseY > 10) overMuteSFX = true;
+  if(mouseX < canvas.offsetLeft+130 && mouseX > canvas.offsetLeft+80 && mouseY < 40 && mouseY > 10) overMuteSFX = true;
   else overMuteSFX = false;
 }
 

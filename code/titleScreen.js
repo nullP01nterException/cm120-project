@@ -108,7 +108,7 @@ function mouseOver(){
 		titleInstructOver = false;
 	}
 
-	if(mouseX < 60 && mouseX > 10 && mouseY < 40 && mouseY > 10){
+	if(mouseX < canvas.offsetLeft+60 && mouseX > canvas.offsetLeft+10 && mouseY < 40 && mouseY > 10){
 		if(state == 3) overCreditBack = true;
 		if(state == 4) overInstructBack = true;
 		if(state == 0) overTitleMute = true;
