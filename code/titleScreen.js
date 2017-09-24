@@ -87,21 +87,21 @@ function drawCredits(){
 }
 
 function mouseOver(){
-	if(state == 0 && mouseX < screen.width/2 + 120 && mouseX > screen.width/2 - 60
+	if(state == 0 && mouseX < canvas.offsetLeft+canvas.width/2 + 120 && mouseX > canvas.offsetLeft+canvas.width/2 - 60
 		&& mouseY < canvas.height/2 && mouseY > canvas.height/2 - 25){
 		titleOver = true;
 	}else{
 		titleOver = false;
 	}
 
-	if(state == 0 && mouseX < screen.width/2 + 95 && mouseX > screen.width/2 - 40
+	if(state == 0 && mouseX < canvas.offsetLeft+canvas.width/2 + 95 && mouseX > canvas.offsetLeft+canvas.width/2 - 40
 		&& mouseY < canvas.height/2 + 120 && mouseY > canvas.height/2 + 95){
 		titleCreditOver = true;
 	}else{
 		titleCreditOver = false;
 	}
 
-	if(state == 0 && mouseX < screen.width/2 + 130 && mouseX > screen.width/2 - 65
+	if(state == 0 && mouseX < canvas.offsetLeft+canvas.width/2 + 130 && mouseX > canvas.offsetLeft+canvas.width/2 - 65
 		&& mouseY < canvas.height/2 + 65 && mouseY > canvas.height/2 + 40){
 		titleInstructOver = true;
 	}else{
